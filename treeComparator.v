@@ -8,7 +8,6 @@ module maiorIgual2Bits (input [1:0] a,b, output M, output I);
                 (a[0] & a[1] & b[0] & b[1]);
 endmodule
 
-
 module maiorIgualArvore (input Me,Ie,Md,Id, output M, output I);
     assign M = Me | (Ie & Md);
     assign I = Id & Ie;
@@ -27,46 +26,27 @@ module arvore(input [7:0] a,b, output M,I);
     maiorIgualArvore A2 (m32, i32, m10, i10, md, id);
 
     maiorIgualArvore A3(me, ie , md, id, M, I);
-
 endmodule
 
-
-//testbenchs
-module testbench1(); //Teste da função maiorIgual2Bits
-//imprime a primeira tabela (repetindo alguns dados)
-    reg [1:0]a,b;
+//testbench
+module testbench();
+    reg [7:0]a,b;
     wire M, I;
+    integer i, j;
 
-    maiorIgual2Bits comparador(a, b, M, I);
+    arvore final(a, b, M, I);
 
     initial begin
-        a = 0; #1; //a = 0
-        
-        $monitor("a %b b %b     M %b  I %b",a, b, M, I );
-
-        b = 0; #1; //b = 0 
-        b = 1; #1; //b=1     
-        b = 2; #1; //b=2      
-        b = 3; #1; //b=3
-
-        b = 0; #1; //b = 0
-        a = 1; #1; //a=1     
-        b = 1; #1; //b=1     
-        b = 2; #1; //b=2      
-        b = 3; #1; //b=3
-
-        b = 0; #1; //b = 0 
-        a = 2; #1; //a=2
-        b = 1; #1; //b=1     
-        b = 2; #1; //b=2      
-        b = 3; #1; //b=3
-
-        b = 0; #1; //b = 0 
-        a = 3; #1; //a=3
-        b = 1; #1; //b=1     
-        b = 2; #1; //b=2      
-        b = 3; #1; //b=3
-
-        
+        a = 8'b00000000; #1;
+        b = 8'b00000000; #1;
+        //$monitor("a %b   b %b           M %b   I %b", a, b, M, I);  //impressao
+        for (i=0; i<256; i=i+1) begin
+            a = a + 8'b00000001; #1;
+            for (j=0; j<256; j=j+1) begin
+                b = b + 8'b00000001; #1;
+                if ( (a>b & M==0) | (a==b & I==0) | (a<b & (M==1 | I == 1)) ) $display("FALHA");
+                //Caso o programa entre em algumas destas condicoes, aparecera' uma mensagem de erro
+            end
+        end
     end
 endmodule
