@@ -8,10 +8,10 @@ module maiorIgual2Bits (input [1:0] a,b, output M, output I);
                 (a[0] & a[1] & b[0] & b[1]);
 endmodule
 
-/*
+
 module maiorIgualArvore (input Me,Ie,Md,Id, output M, output I);
-    assign M = Me...;
-    assign I = ...;
+    assign M = Me | (Ie & Md);
+    assign I = Id & Ie;
 endmodule
 
 module arvore(input [7:0] a,b, output M,I);
@@ -30,7 +30,7 @@ module arvore(input [7:0] a,b, output M,I);
 
 endmodule
 
-*/
+
 //testbenchs
 module testbench1(); //Teste da função maiorIgual2Bits
 //imprime a primeira tabela (repetindo alguns dados)
