@@ -5,5 +5,5 @@ Primeiro trabalho da disciplina INF251 (Organização de Computadores I) 2019/2.
 <b>Integrantes:</b>
 <li>Lucas Santos Campos - 92867</li>
 <li>Daniela Assis de Sousa - 95676</li>
-<li>Nilson Paiva - ...</li>
+<li>Nilson Paiva - 95688</li>
 </ul>
