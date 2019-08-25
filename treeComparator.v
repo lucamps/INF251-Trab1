@@ -26,7 +26,7 @@ module arvore(input [7:0] a,b, output M,I);
     maiorIgual2Bits M10 (a[1:0], b[1:0], m10, i10);
     maiorIgualArvore A2 (m32, i32, m10, i10, md, id);
 
-maiorIgualArvore A3(me, ie , md, id, M, I);
+    maiorIgualArvore A3(me, ie , md, id, M, I);
 
 endmodule
 
